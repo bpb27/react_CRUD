@@ -2,8 +2,13 @@ th {
   padding-left: 10px;
   text-decoration: underline;
   text-align: left;
+  cursor: pointer;
 }
 
 td {
   padding: 10px;
+}
+
+button {
+  cursor: pointer;
 }

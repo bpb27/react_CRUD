@@ -124,7 +124,8 @@ class App extends Component {
     });
 
     this.state = {
-      list: parsedList
+      list: parsedList,
+      sortField: null
     };
 
   }
@@ -158,12 +159,27 @@ class App extends Component {
     }));
   }
 
+  sortBy (field) {
+    if (field === this.state.sortField) {
+      this.setState((prevState) => ({
+        list: prevState.list.reverse()
+      }));
+    } else {
+      this.setState((prevState) => ({
+        list: prevState.list.sort((a,b) => a[field] > b[field])
+      }));
+    }
+    this.setState({ sortField: field });
+  }
+
   render() {
     return (
       <table>
         <thead>
           <tr>
-            { this.props.tableHeaders.map((header, i) => <th key={i.toString()}>{header}</th>) }
+            { this.props.tableHeaders.map((header, i) =>
+              <th key={i.toString()} onClick={() => this.sortBy(header)}>{header}</th>
+            )}
           </tr>
         </thead>
         <tbody>
